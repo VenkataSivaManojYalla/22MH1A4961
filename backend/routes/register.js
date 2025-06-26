@@ -10,9 +10,8 @@ router.post("/register", async (req, res) => {
     );
     res.status(200).json(response.data);
   } catch (error) {
-    res.status(error.response?.status || 500).json(
-      error.response?.data || { error: "Unknown error occurred" }
-    );
+    const errorMessage = error.response?.data?.error || "Already registered or unknown error";
+    res.status(error.response?.status || 500).json({ error: errorMessage });
   }
 });
 
